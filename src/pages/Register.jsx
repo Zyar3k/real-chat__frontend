@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import axios from "axios";
+import { registerRoute } from "../utils/APIRoutes";
 
 const Register = () => {
   const [values, setValues] = useState({
@@ -11,6 +13,7 @@ const Register = () => {
     password: "",
     confirmPassword: "",
   });
+
   const toastOptions = {
     position: "bottom-right",
     autoClose: 8000,
@@ -18,9 +21,17 @@ const Register = () => {
     draggable: true,
     theme: "dark",
   };
-  const handleSubmit = (e) => {
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    handleValidation();
+    if (handleValidation()) {
+      const { password, confirmPassword, email, username } = values;
+      const { data } = await axios.post(registerRoute, {
+        username,
+        email,
+        password,
+      });
+    }
   };
 
   const handleValidation = () => {
