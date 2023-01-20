@@ -1,14 +1,56 @@
-import React from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Register = () => {
+  const [values, setValues] = useState({
+    username: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+  const toastOptions = {
+    position: "bottom-right",
+    autoClose: 8000,
+    pauseOnHover: true,
+    draggable: true,
+    theme: "dark",
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert("form");
+    handleValidation();
   };
 
-  const handleOnChange = (e) => {};
+  const handleValidation = () => {
+    const { username, password, confirmPassword, email } = values;
+    if (password !== confirmPassword) {
+      toast.error(
+        "Password and confirm password should be the same.",
+        toastOptions
+      );
+      return false;
+    } else if (username.length < 3) {
+      toast.error("Username should be longer then 3 characters", toastOptions);
+      return false;
+    } else if (password.length <= 8) {
+      toast.error(
+        "Password should be equal or longer then 8 characters",
+        toastOptions
+      );
+      return false;
+    } else if (email === "") {
+      toast.error("Email is required", toastOptions);
+      return false;
+    }
+    return true;
+  };
+
+  const handleOnChange = (e) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
+
   return (
     <>
       <FormContainer>
@@ -47,6 +89,7 @@ const Register = () => {
           </span>
         </form>
       </FormContainer>
+      <ToastContainer />
     </>
   );
 };
