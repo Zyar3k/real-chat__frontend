@@ -21,6 +21,14 @@ const SetAvatar = () => {
     draggable: true,
     theme: "dark",
   };
+  useEffect(() => {
+    async function checkLocal() {
+      if (!localStorage.getItem("chat-app-user")) {
+        navigate("/login");
+      }
+    }
+    checkLocal();
+  }, []);
   const setProfilePicture = async () => {
     if (selectedAvatar === undefined) {
       toast.error("Please select an avatar", toastOptions);
