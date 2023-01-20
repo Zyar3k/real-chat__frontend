@@ -42,10 +42,10 @@ const Login = () => {
   const handleValidation = () => {
     const { username, password } = values;
     if (password === "") {
-      toast.error("Username and email are required", toastOptions);
+      toast.error("Username and password are required", toastOptions);
       return false;
     } else if (username.length === "") {
-      toast.error("Username and email are required", toastOptions);
+      toast.error("Username and password are required", toastOptions);
       return false;
     }
     return true;
@@ -54,6 +54,12 @@ const Login = () => {
   const handleOnChange = (e) => {
     setValues({ ...values, [e.target.name]: e.target.value });
   };
+
+  useEffect(() => {
+    if (localStorage.getItem("chat-app-user")) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <>
