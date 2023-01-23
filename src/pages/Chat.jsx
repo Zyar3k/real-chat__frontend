@@ -3,6 +3,7 @@ import styled from "styled-components";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { allUsersRoute } from "../utils/APIRoutes";
+import Contacts from "../components/Contacts";
 
 const Chat = () => {
   const [contacts, setContacts] = useState([]);
@@ -34,14 +35,16 @@ const Chat = () => {
   }, [currentUser]);
   return (
     <Container>
-      <div className="container"></div>
+      <div className="container">
+        <Contacts contacts={contacts} currentUser={currentUser} />
+      </div>
     </Container>
   );
 };
 
 const Container = styled.div`
   height: 100vh;
-  height: 100vw;
+  width: 100vw;
   display: flex;
   flex-direction: column;
   justify-content: center;
