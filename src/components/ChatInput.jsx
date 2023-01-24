@@ -21,7 +21,7 @@ const ChatInput = ({ handleSendMessage }) => {
     e.preventDefault();
     if (msg.length > 0) {
       handleSendMessage(msg);
-      setMsg(``);
+      setMsg("");
     }
   };
   return (
