@@ -6,7 +6,7 @@ import ChatInput from "./ChatInput";
 import Logout from "./Logout";
 import { v4 as uuidv4 } from "uuid";
 
-const ChatContainer = ({ currentChat, currentUser, socket }) => {
+const ChatContainer = ({ currentChat, socket }) => {
   const [messages, setMessages] = useState([]);
   const [arrivalMessage, setArrivalMessage] = useState(null);
   const scrollRef = useRef();
