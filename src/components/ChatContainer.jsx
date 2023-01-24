@@ -5,7 +5,9 @@ import Logout from "./Logout";
 import Messages from "./Messages";
 
 const ChatContainer = ({ currentChat }) => {
-  const handleSendMessage = async (msg) => {};
+  const handleSendMessage = async (msg) => {
+    alert(msg);
+  };
   return (
     <>
       {currentChat && (
